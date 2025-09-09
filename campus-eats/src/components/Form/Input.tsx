@@ -7,7 +7,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 export default function Input({ label, ...props }: InputProps) {
   return (
     <div className="w-full">
-      <label className="block text-sm font-medium text-gray-700 mb-1">
+  <label className="block text-sm font-medium text-gray-700 mb-1">
         {label}
       </label>
       <input
