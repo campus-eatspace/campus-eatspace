@@ -1,0 +1,100 @@
+.sign-card{
+    max-width: 900px;
+}
+.form-control:focus {
+  background-color: transparent !important;
+  border-color: #4CAF50 !important;
+  box-shadow: none !important;
+  color: white !important;
+}
+
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.form-check-input:checked {
+  background-color: #4CAF50 !important;
+  border-color: #4CAF50 !important;
+}
+
+.btn-outline-light:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-color: white !important;
+}
+
+/* New divider with text style */
+.divider-with-text {
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.875rem; /* small */
+  margin-bottom: 1.5rem;
+}
+
+.divider-with-text .line {
+  flex: 1;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.6);
+  margin: 0 0.75rem;
+}
+.login{
+  color: #FF8300 !important;
+  margin-top: -5px;
+}
+.login-btn{
+        font-weight: 500;
+        background-color: #8AC537 !important;
+        border-color: #8AC537 !important;
+}
+.login-btn:hover{
+    background-color: #7BB32E !important;
+    border-color: #7BB32E !important;
+}
+.login-btn:active{
+    background-color: #6CA028 !important;
+    border-color: #6CA028 !important;
+}
+.forgot-pass{
+  display: flex;
+  float: right;
+  margin-top: -45px;
+}
+.forgot-pass p{
+  color: white;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.sign{
+  display: flex;
+  gap: 4px;
+}
+.signup{
+  width: 90% !important;
+}
+.as{
+  width: 10% !important;
+}
+.dropdown-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #f9f9f9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  min-width: 120px;
+  margin-top: 5px;
+  width: 80%;
+  z-index: 1;
+  transition: .3s ease-in-out;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #333;
+}
+
+.dropdown-content a:hover {
+  background: #eee;
+}
