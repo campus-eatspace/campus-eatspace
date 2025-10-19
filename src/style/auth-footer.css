@@ -1,0 +1,138 @@
+        .campus-footer {
+          background-color: #000;
+          color: white;
+          padding: 3rem 0;
+          min-height: 200px;
+          margin-left:  2%;
+          margin-right:  2%;
+          border-radius: 15px;
+        }
+
+        .logo-icon {
+          width: 60px;
+          height: 60px;
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.2rem;
+        }
+
+        .campus-title {
+          font-size: 2rem;
+          font-weight: bold;
+          margin: 0;
+          color: white;
+        }
+
+        .tagline-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 15px;
+          font-size: 1.5rem;
+          margin-bottom: 2rem;
+        }
+
+        .tagline-image {
+          height: 32px;
+          object-fit: contain;
+          margin: -5px;
+        }
+
+        .campus{
+            margin-top: -20px;
+        }
+
+        .cafeteria-text {
+          color: white;
+          font-weight: 500;
+        }
+
+        .footer-bottom {
+          margin-top: 2rem;
+        }
+
+        .rights-text {
+          margin: 0;
+          font-size: 0.9rem;
+          color: #ccc;
+        }
+
+        .social-section {
+          text-align: right;
+          margin-bottom: 1rem;
+        }
+
+        .social-label {
+          font-size: 0.9rem;
+          margin-right: 10px;
+          color: #ccc;
+        }
+
+        .social-icons {
+          display: inline-flex;
+          gap: 10px;
+        }
+
+        .social-link {
+          color: white;
+          font-size: 1.2rem;
+          text-decoration: none;
+          transition: color 0.3s ease;
+          cursor: pointer;
+        }
+
+        .social-link:hover {
+          color: #4ade80;
+        }
+        .soc-img{
+            height: 20px;
+            width: 20px;
+            cursor: pointer;
+        }
+
+        .terms-section {
+          text-align: right;
+        }
+
+        .terms-link {
+          color: #ccc;
+          text-decoration: none;
+          font-size: 0.9rem;
+        }
+
+        .terms-link:hover {
+          color: white;
+          text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+          .campus-title {
+            font-size: 1.5rem;
+          }
+
+          .tagline-container {
+            font-size: 1.2rem;
+            gap: 10px;
+          }
+
+          .tagline-image {
+            height: 24px;
+          }
+
+          .social-section,
+          .terms-section {
+            text-align: center;
+          }
+
+          .footer-bottom {
+            text-align: center;
+          }
+
+          .rights-text {
+            text-align: center;
+            margin-bottom: 1rem;
+            display: none;
+          }
+        }
