@@ -185,7 +185,7 @@ const RegisterAs: React.FC = () => {
                 {/* Login Link */}
                 <div className="text-center">
                   <span className="text-white-50 small">Have an account? </span>
-                  <Link to="/login">
+                  <Link to="/vendor/login">
                     <button
                       className="btn login btn-link p-0 text-warning text-decoration-none small"
                       onClick={handleLoginRedirect}
