@@ -43,6 +43,10 @@ export default function Login() {
         <a href="/signup" className="text-indigo-200 hover:underline">
           Sign up
         </a>
+        <span className="mx-2 text-white/50">|</span>
+        <a href="/forgot-password" className="text-indigo-200 hover:underline">
+          Forgot password?
+        </a>
       </p>
     </AuthLayout>
   );

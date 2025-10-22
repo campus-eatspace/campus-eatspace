@@ -9,10 +9,10 @@ const RestaurantCard = ({ id, name }: RestaurantCardProps) => {
   return (
     <Link
       to={`/restaurant/${id}`}
-      className="block p-4 bg-white rounded-lg shadow hover:shadow-lg transition"
+      className="group block p-4 bg-white rounded-lg shadow hover:shadow-lg transition"
     >
-      <h3 className="font-semibold">{name}</h3>
-      <p className="text-sm text-gray-500">Click to view menu</p>
+      <h3 className="text-sm font-semibold text-black transition group-hover:text-orange-500">{name}</h3>
+      <p className="text-xs text-black transition group-hover:text-orange-500">Click to view menu</p>
     </Link>
   );
 };

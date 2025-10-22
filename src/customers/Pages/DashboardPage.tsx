@@ -12,11 +12,12 @@ export default function DashboardPage() {
       <Sidebar />
 
       
-      <main className="flex-1 p-6 bg-gray-50">
-        <Searchbar />
-        <CategoryList />
+      <main className="flex-1 p-6 bg-gray-50 flex flex-col">
+        <div>
+          <Searchbar />
+          <CategoryList />
 
-        <section className="mt-6">
+          <section className="mt-6">
           <h2 className="flex justify-between items-center mb-4">
             <span className="font-semibold text-lg">Restaurants</span>
             <button className="text-orange-500 hover:underline">View All</button>
@@ -28,9 +29,12 @@ export default function DashboardPage() {
             <RestaurantCard id="numbers" name="Numbers" />
             <RestaurantCard id="manna-palace" name="Manna Palace" />
           </div>
-        </section>
+          </section>
+        </div>
 
-        <Footer />
+        <div className="mt-auto">
+          <Footer />
+        </div>
       </main>
 
       
