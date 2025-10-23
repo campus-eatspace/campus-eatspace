@@ -19,10 +19,10 @@ export default function CategoryList() {
         <button
           key={i}
           onClick={() => handleClick(cat)}
-          className={`px-4 py-2 rounded-lg text-sm ${
+          className={`px-4 py-2 rounded-lg text-sm transform transition-all duration-200 hover:bg-green-200 hover:text-orange-500 ease-out ${
             i === 0
               ? "bg-green-400 text-white"
-              : "bg-white border hover:bg-gray-100"
+              : "bg-white border hover:bg-green-200 hover:scale-[1.2]"
           }`}
         >
           {cat}

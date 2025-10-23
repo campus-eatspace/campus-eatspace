@@ -20,7 +20,7 @@ export default function DashboardPage() {
           <section className="mt-6">
           <h2 className="flex justify-between items-center mb-4">
             <span className="font-semibold text-lg">Restaurants</span>
-            <button className="text-orange-500 hover:underline">View All</button>
+            <button className="text-orange-500 hover:underline text-sm px-2 py-1">View All</button>
           </h2>
 
           

@@ -3,7 +3,7 @@ import { Home, Heart, Star, Settings, HelpCircle, Menu } from "lucide-react";
 import { useState } from "react";
 
 const menuItems = [
-  { label: "Dashboard", icon: <Home size={18} /> },
+  { label: "Dashboard", icon: <img src="/src/assets/dashboard 1.png" alt="Dashboard" className="h-4 w-4" /> },
   { label: "Wishlist", icon: <Heart size={18} /> },
   { label: "Favorite", icon: <Star size={18} /> },
 ];
