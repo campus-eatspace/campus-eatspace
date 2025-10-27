@@ -81,14 +81,14 @@ const RegisterAs: React.FC = () => {
                     Create your account
                   </h4>
                   <p className="text-white-50 small">
-                    Welcome! Please enter your details to register
+                    Welcome! Please enter your details to sign up
                   </p>
                 </div>
 
                 {/* Form */}
                 <div>
                   <TextField
-                    label="Vendor Name"
+                    label="Name"
                     type="text"
                     placeholder="Enter your name"
                     value={text}
@@ -132,31 +132,14 @@ const RegisterAs: React.FC = () => {
                   </div>
 
                   {/* Sign Up Button */}
-                  <div className="sign">
-                    <Button
-                      text="Sign Up"
-                      onClick={handleSignUp}
-                      className="mb-3 signup"
-                    />
-                    <Button
-                      text={
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          fill="currentColor"
-                          className="bi bi-chevron-down"
-                          viewBox="0 0 16 16"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
-                          />
-                        </svg>
-                      }
-                      onClick={handleSignUp}
-                      className="mb-3 as"
-                    />
+                  <div className="sign d-flex justify-content-center">
+                    <div style={{ width: 540 }}>
+                      <Button
+                        text="Sign Up"
+                        onClick={handleSignUp}
+                        className="mb-3 signup"
+                      />
+                    </div>
                   </div>
                 </div>
 

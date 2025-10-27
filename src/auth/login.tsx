@@ -185,7 +185,7 @@ const LoginAs: React.FC = () => {
                   <span className="text-white-50 small">
                     Don't have an account?{" "}
                   </span>
-                  <Link to="/signup">
+                  <Link to="/vendor/signup">
                     <button
                       className="btn login btn-link p-0 text-warning text-decoration-none small"
                       onClick={handleLoginRedirect}

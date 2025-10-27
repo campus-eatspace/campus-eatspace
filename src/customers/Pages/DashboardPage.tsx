@@ -7,12 +7,11 @@ import Footer from "../components/Layout/Footer/Footer";
 
 export default function DashboardPage() {
   return (
-    <div className="flex min-h-screen">
-      
+    <div className="flex flex-col md:flex-row min-h-screen">
+
       <Sidebar />
 
-      
-      <main className="flex-1 p-6 bg-gray-50 flex flex-col">
+      <main className="flex-1 p-4 md:p-6 bg-gray-50 flex flex-col">
         <div>
           <Searchbar />
           <CategoryList />
@@ -38,7 +37,7 @@ export default function DashboardPage() {
       </main>
 
       
-      <aside className="w-72 p-6 bg-white border-l">
+      <aside className="w-full md:w-72 p-4 md:p-6 bg-white md:border-l border-t md:border-t-0">
         <OrderSummary />
       </aside>
     </div>

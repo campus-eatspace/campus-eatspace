@@ -1,5 +1,7 @@
 import { useParams } from "react-router-dom";
+import Sidebar from "../components/Layout/Sidebar/Sidebar";
 import MenuCard from "../components/Menu/MenuCard/MenuCard";
+import OrderSummary from "../components/Layout/OrderSummary/OrderSummary";
 // import { useOrder } from "../context/OrderContext";
 // import { toast } from "react-toastify";
 
@@ -29,22 +31,32 @@ export default function RestaurantPage() {
   const menuItems = menus[id || ""] || [];
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Menu for {id}</h1>
+    <div className="flex flex-col md:flex-row min-h-screen">
+      <Sidebar />
 
-      {menuItems.length > 0 ? (
-        <div className="grid grid-cols-2 gap-4">
-          {menuItems.map((item, index) => (
-            <MenuCard
-              key={index}
-              name={item.name}
-              price={`$${item.price}`}
-            />
-          ))}
+      <main className="flex-1 p-4 md:p-6 bg-gray-50 flex flex-col">
+        <div>
+          <h1 className="text-2xl font-bold mb-4">Menu for {id}</h1>
+
+          {menuItems.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {menuItems.map((item, index) => (
+                <MenuCard
+                  key={index}
+                  name={item.name}
+                  price={`$${item.price}`}
+                />
+              ))}
+            </div>
+          ) : (
+            <p>No menu available for this restaurant.</p>
+          )}
         </div>
-      ) : (
-        <p>No menu available for this restaurant.</p>
-      )}
+      </main>
+
+      <aside className="w-full md:w-72 p-4 md:p-6 bg-white md:border-l border-t md:border-t-0">
+        <OrderSummary />
+      </aside>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
-import { Home, Heart, Star, Settings, HelpCircle, Menu } from "lucide-react";
+import { Heart, Star, Settings, HelpCircle, Menu } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const menuItems = [
   { label: "Dashboard", icon: <img src="/src/assets/dashboard 1.png" alt="Dashboard" className="h-4 w-4" /> },
@@ -15,6 +16,15 @@ const otherItems = [
 
 export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
+  const navigate = useNavigate();
+
+  const handleItemClick = (label: string) => {
+    if (label === "Dashboard") {
+      navigate("/dashboard");
+    } else if (["Wishlist", "Favorite", "Settings", "Help & Support"].includes(label)) {
+      navigate("/coming-soon");
+    }
+  };
 
   return (
     <>
@@ -43,6 +53,7 @@ export default function Sidebar() {
               <li
                 key={item.label}
                 className="flex items-center gap-2 cursor-pointer hover:text-orange-500"
+                onClick={() => handleItemClick(item.label)}
               >
                 {item.icon}
                 <span>{item.label}</span>
@@ -56,6 +67,7 @@ export default function Sidebar() {
               <li
                 key={item.label}
                 className="flex items-center gap-2 cursor-pointer hover:text-orange-500"
+                onClick={() => handleItemClick(item.label)}
               >
                 {item.icon}
                 <span>{item.label}</span>

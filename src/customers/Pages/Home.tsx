@@ -1,31 +1,97 @@
 import { Link } from "react-router-dom";
+import { useState, useRef, useEffect } from "react";
 
 export default function LandingPage() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [menuVisible, setMenuVisible] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
+  const closeTimer = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (closeTimer.current) {
+        window.clearTimeout(closeTimer.current);
+      }
+    };
+  }, []);
+
+  const toggleMobile = () => {
+    if (!mobileOpen) {
+      // open
+      setMenuVisible(true);
+      setMobileOpen(true);
+      setIsClosing(false);
+    } else {
+      // start closing animation, then unmount
+      setIsClosing(true);
+      setMobileOpen(false);
+      closeTimer.current = window.setTimeout(() => {
+        setMenuVisible(false);
+        setIsClosing(false);
+      }, 220);
+    }
+  };
   return (
     <div className="min-h-screen bg-white text-gray-900 overflow-x-hidden">
     
       <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-7xl">
-        <div className="flex items-center justify-between px-6 py-3 bg-white/80 backdrop-blur-md rounded-full shadow-lg border border-gray-200/50">
+        <div className="flex items-center justify-between px-4 md:px-6 py-3 bg-white/90 backdrop-blur-md rounded-full shadow-lg border border-gray-200/50">
           <Link to="/" className="flex items-center gap-2">
             <img src="/logo.png" alt="Campus Eats" className="w-8 h-8 object-contain" />
             <span className="font-semibold text-lg">Campus Eats</span>
           </Link>
 
-          <nav className="flex items-center gap-4">
-            <Link to="/about" className="px-5 py-2 rounded-full bg-white hover:bg-orange-400 hover:text-white transition-all duration-300 shadow">
-              About Us
-            </Link>
-            <Link to="/order" className="px-5 py-2 rounded-full bg-white hover:bg-orange-400 hover:text-white transition-all duration-300 shadow">
+          {/* Mobile menu button */}
+          <button
+            className="md:hidden p-2 rounded-lg bg-white/0 hover:bg-gray-100"
+            onClick={toggleMobile}
+            aria-label="Toggle menu"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+
+          <nav className="hidden md:flex items-center gap-4">
+            <Link to="/dashboard" className="px-3 md:px-5 py-2 rounded-full bg-white hover:text-orange-500 transition-all duration-300 shadow text-sm md:text-base">
               Order Now
             </Link>
-            <Link to="/register" className="px-5 py-2 rounded-full bg-white hover:bg-orange-400 hover:text-white transition-all duration-300 shadow">
+            <Link to="/venddor/login" className="px-3 md:px-5 py-2 rounded-full bg-white hover:text-orange-500 transition-all duration-300 shadow text-sm md:text-base">
               Register
             </Link>
-            <Link to="/login" className="px-5 py-2 rounded-full bg-white hover:bg-orange-400 hover:text-white transition-all duration-300 shadow">
+            <Link to="/login" className="px-3 md:px-5 py-2 rounded-full bg-white hover:text-orange-500 transition-all duration-300 shadow text-sm md:text-base">
               Login
             </Link>
           </nav>
         </div>
+
+        {/* Mobile dropdown menu */}
+        {menuVisible && (
+          <div className="md:hidden mt-2 w-[95%] max-w-7xl left-1/2 -translate-x-1/2 fixed top-[72px] z-40 pointer-events-none">
+            <div
+              className={`mx-auto bg-white rounded-xl shadow-lg p-4 transform transition-all duration-200 ease-out ${
+                mobileOpen && !isClosing
+                  ? "opacity-100 translate-y-0 scale-100 pointer-events-auto"
+                  : "opacity-0 -translate-y-2 scale-95"
+              }`}
+            >
+              <ul className="flex flex-col gap-2">
+                <li>
+                  <Link to="/about" onClick={toggleMobile} className="block px-3 py-2 rounded hover:bg-gray-100 hover:text-orange-500">About Us</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard" onClick={toggleMobile} className="block px-3 py-2 rounded hover:bg-gray-100 hover:text-orange-500">Order Now</Link>
+                </li>
+                <li>
+                  <Link to="/vendor/login" onClick={toggleMobile} className="block px-3 py-2 rounded hover:bg-gray-100 hover:text-orange-500">Register</Link>
+                </li>
+                <li>
+                  <Link to="/login" onClick={toggleMobile} className="block px-3 py-2 rounded hover:bg-gray-100 hover:text-orange-500">Login</Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+        )}
       </header>
 
       <section
@@ -55,8 +121,8 @@ export default function LandingPage() {
 
           <div className="relative bg-black text-white p-10 rounded-3xl shadow-lg">
             <img
-              src="/campus-bg.png"
-              alt=""
+              src="/bg.jpg"
+              alt="school"
               className="absolute inset-0 w-full h-full object-cover opacity-30 rounded-3xl"
             />
             <div className="relative z-10 space-y-4 text-lg leading-relaxed">
@@ -112,7 +178,7 @@ export default function LandingPage() {
         </div>
 
         <Link
-          to="/order"
+          to="/dashboard"
           className="inline-block mt-12 text-orange-500 font-semibold hover:underline hover:scale-105 transition-transform"
         >
           Get Started →
