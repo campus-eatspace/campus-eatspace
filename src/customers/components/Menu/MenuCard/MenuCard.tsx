@@ -9,7 +9,6 @@ interface MenuCardProps {
 export default function MenuCard({ name, price }: MenuCardProps) {
   const { addOrder } = useOrder();
 
-  // Convert price string to number for addOrder
   const handleClick = () => {
     const priceNumber = Number(price.replace(/[^\d.]/g, ""));
     addOrder({ name, price: priceNumber });
