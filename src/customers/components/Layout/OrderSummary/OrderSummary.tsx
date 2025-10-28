@@ -1,9 +1,7 @@
-import { useState } from "react";
 import { useOrder } from "../../../context/OrderContext";
 
 export default function OrderSummary() {
   const { orders } = useOrder();
-  const [paymentMethod, setPaymentMethod] = useState("debit");
 
   // Calculate total
   const total = orders.reduce(
@@ -42,65 +40,6 @@ export default function OrderSummary() {
         <div className="flex justify-between font-semibold">
           <span>Total</span>
           <span>${total + 2}</span>
-        </div>
-      </div>
-
-      <div className="mb-4">
-        <h3 className="font-medium mb-2">Payment Method</h3>
-        <div className="space-y-2">
-          {/* Debit Card Option */}
-          <label
-            className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer transition ${
-              paymentMethod === "debit"
-                ? "bg-orange-100 border border-orange-500 text-orange-600"
-                : "bg-gray-50 border border-gray-300"
-            }`}
-          >
-            <input
-              type="radio"
-              name="payment"
-              value="debit"
-              checked={paymentMethod === "debit"}
-              onChange={(e) => setPaymentMethod(e.target.value)}
-            />
-            Debit Card
-          </label>
-
-         
-          <label
-            className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer transition ${
-              paymentMethod === "credit"
-                ? "bg-orange-100 border border-orange-500 text-orange-600"
-                : "bg-gray-50 border border-gray-300"
-            }`}
-          >
-            <input
-              type="radio"
-              name="payment"
-              value="credit"
-              checked={paymentMethod === "credit"}
-              onChange={(e) => setPaymentMethod(e.target.value)}
-            />
-            Credit Card
-          </label>
-
-        
-          <label
-            className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer transition ${
-              paymentMethod === "cash"
-                ? "bg-orange-100 border border-orange-500 text-orange-600"
-                : "bg-gray-50 border border-gray-300"
-            }`}
-          >
-            <input
-              type="radio"
-              name="payment"
-              value="cash"
-              checked={paymentMethod === "cash"}
-              onChange={(e) => setPaymentMethod(e.target.value)}
-            />
-            Cash on Delivery
-          </label>
         </div>
       </div>
 

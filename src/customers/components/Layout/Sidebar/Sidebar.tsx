@@ -1,6 +1,6 @@
 "use client";
-import { Heart, Star, Settings, HelpCircle, Menu } from "lucide-react";
-import { useState } from "react";
+import { Heart, Star, Settings, HelpCircle, Menu, X } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 const menuItems = [
@@ -17,6 +17,25 @@ const otherItems = [
 export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
+  const sidebarRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        !collapsed && 
+        sidebarRef.current && 
+        !sidebarRef.current.contains(event.target as Node) &&
+        window.innerWidth < 768 
+      ) {
+        setCollapsed(true);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [collapsed]);
 
   const handleItemClick = (label: string) => {
     if (label === "Dashboard") {
@@ -24,20 +43,27 @@ export default function Sidebar() {
     } else if (["Wishlist", "Favorite", "Settings", "Help & Support"].includes(label)) {
       navigate("/coming-soon");
     }
+  
+    setCollapsed(true);
   };
 
   return (
     <>
-      {/* Mobile Toggle Button */}
+  
       <button
-        className="md:hidden fixed top-4 left-4 z-50 bg-orange-500 text-white p-2 rounded-lg shadow-lg"
+        className={`md:hidden sticky top-0 left-0 m-4 z-30 p-2 rounded-lg shadow-lg transition-colors ${
+          collapsed 
+            ? "bg-orange-500 text-white hover:bg-orange-600" 
+            : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+        }`}
         onClick={() => setCollapsed((c) => !c)}
-        aria-label="Toggle Sidebar"
+        aria-label={collapsed ? "Open Sidebar" : "Close Sidebar"}
       >
-        <Menu size={24} />
+        {collapsed ? <Menu size={24} /> : <X size={24} />}
       </button>
 
       <div
+        ref={sidebarRef}
         className={`
           bg-gray-100 h-screen p-4 flex flex-col justify-between
           fixed top-0 left-0 z-40 transition-all duration-300
