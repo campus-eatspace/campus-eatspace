@@ -1,5 +1,5 @@
 import logo from "../assets/logo.png";
-import From from "../assets/from.png";
+import From from "../assets/From.png";
 import To from "../assets/to.png";
 import Crib from "../assets/crib.png";
 import "../style/auth-footer.css"
