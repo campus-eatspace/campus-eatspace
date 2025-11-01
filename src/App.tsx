@@ -1,6 +1,5 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RegisterAs from "./auth/signup";
 import LoginAs from "./auth/login";
