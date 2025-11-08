@@ -16,7 +16,7 @@ export default function AuthLayout({ children, title }: AuthLayoutProps) {
       <div className="absolute inset-0 bg-black/40" />
 
       {/* Card */}
-      <div className="relative w-full max-w-md bg-transparent backdrop-blur-md rounded-2xl shadow-lg p-8 z-10">
+      <div className="relative w-full max-w-md bg-transparent backdrop-blur-md rounded-2xl shadow-lg py-16 px-12 z-10">
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
           {title}
         </h2>

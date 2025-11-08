@@ -1,34 +1,69 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import TextField from "../components/InputField";
 import Button from "../components/CustomButton";
 import Footer from "../components/Footer";
 import logo from "../assets/logo.png";
 import google from "../assets/google.png";
 import "../style/auth.css";
+import { useAuth } from "../context/AuthContext";
 
-// Main Login Component
 const RegisterAs: React.FC = () => {
-  const [text, setText] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberDevice, setRememberDevice] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
-  const handleSignUp = () => {
-    console.log("Sign up clicked", { email, password, rememberDevice });
+  const { signUp, signInWithGoogle } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSignUp = async () => {
+    setError("");
+    setSuccess("");
+
+    if (!name || !email || !password) {
+      setError("Please fill in all fields");
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters long");
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      await signUp(email, password, name, 'vendor');
+      setSuccess("Account created successfully! Please check your email to verify your account.");
+      
+      // Redirect to login after 2 seconds
+      setTimeout(() => {
+        navigate("/vendor/login");
+      }, 2000);
+    } catch (err: any) {
+      setError(err.message || "Failed to create account. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleSignUpGoogle = () => {
-    console.log("Sign up with Google clicked");
-  };
-
-  const handleLoginRedirect = () => {
-    console.log("Login redirect clicked");
+  const handleSignUpGoogle = async () => {
+    setError("");
+    try {
+      await signInWithGoogle('vendor');
+      // Redirect will be handled by Supabase
+    } catch (err: any) {
+      setError(err.message || "Failed to sign up with Google.");
+    }
   };
 
   return (
     <div
-      className="position-relative "
+      className="position-relative"
       style={{
         backgroundImage:
           "url(https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80)",
@@ -37,13 +72,11 @@ const RegisterAs: React.FC = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* Background overlay */}
       <div
         className="position-absolute top-0 start-0 w-100 h-100"
         style={{ backgroundColor: "rgba(0, 0, 0, 0.4)" }}
       ></div>
 
-      {/* Main content */}
       <div className="container-fluid box h-100 position-relative">
         <div className="row justify-content-center align-items-center min-vh-100">
           <div className="col-md-8 col-lg-6">
@@ -59,7 +92,6 @@ const RegisterAs: React.FC = () => {
               }}
             >
               <div className="card-body p-4">
-                {/* Logo */}
                 <div className="text-center mb-4">
                   <div
                     className="d-inline-flex align-items-center justify-content-center mb-3"
@@ -85,15 +117,27 @@ const RegisterAs: React.FC = () => {
                   </p>
                 </div>
 
-                {/* Form */}
+                {error && (
+                  <div className="alert alert-danger" role="alert">
+                    {error}
+                  </div>
+                )}
+
+                {success && (
+                  <div className="alert alert-success" role="alert">
+                    {success}
+                  </div>
+                )}
+
                 <div>
                   <TextField
                     label="Vendor Name"
                     type="text"
                     placeholder="Enter your name"
-                    value={text}
-                    onChange={setText}
+                    value={name}
+                    onChange={setName}
                     required
+                    disabled={isLoading}
                   />
 
                   <TextField
@@ -103,6 +147,7 @@ const RegisterAs: React.FC = () => {
                     value={email}
                     onChange={setEmail}
                     required
+                    disabled={isLoading}
                   />
 
                   <TextField
@@ -112,9 +157,9 @@ const RegisterAs: React.FC = () => {
                     value={password}
                     onChange={setPassword}
                     required
+                    disabled={isLoading}
                   />
 
-                  {/* Remember Device Checkbox */}
                   <div className="form-check mb-4">
                     <input
                       className="form-check-input bg-transparent border-secondary"
@@ -122,6 +167,7 @@ const RegisterAs: React.FC = () => {
                       id="rememberDevice"
                       checked={rememberDevice}
                       onChange={(e) => setRememberDevice(e.target.checked)}
+                      disabled={isLoading}
                     />
                     <label
                       className="form-check-label text-white small"
@@ -131,48 +177,28 @@ const RegisterAs: React.FC = () => {
                     </label>
                   </div>
 
-                  {/* Sign Up Button */}
                   <div className="sign">
                     <Button
-                      text="Sign Up"
+                      text={isLoading ? "Creating Account..." : "Sign Up"}
                       onClick={handleSignUp}
                       className="mb-3 signup"
-                    />
-                    <Button
-                      text={
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          fill="currentColor"
-                          className="bi bi-chevron-down"
-                          viewBox="0 0 16 16"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
-                          />
-                        </svg>
-                      }
-                      onClick={handleSignUp}
-                      className="mb-3 as"
+                      disabled={isLoading}
                     />
                   </div>
                 </div>
 
-                {/* Divider */}
                 <div className="divider-with-text">
                   <div className="line"></div>
                   <span>or sign up with</span>
                   <div className="line"></div>
                 </div>
 
-                {/* Google Sign Up Button */}
                 <div className="text-center mb-4">
                   <button
                     className="btn p-2"
                     onClick={handleSignUpGoogle}
                     style={{ width: "40px", height: "40px" }}
+                    disabled={isLoading}
                   >
                     <img
                       src={google}
@@ -182,13 +208,11 @@ const RegisterAs: React.FC = () => {
                   </button>
                 </div>
 
-                {/* Login Link */}
                 <div className="text-center">
                   <span className="text-white-50 small">Have an account? </span>
                   <Link to="/vendor/login">
                     <button
                       className="btn login btn-link p-0 text-warning text-decoration-none small"
-                      onClick={handleLoginRedirect}
                     >
                       Log in
                     </button>
@@ -200,7 +224,6 @@ const RegisterAs: React.FC = () => {
         </div>
       </div>
 
-      {/* Footer */}
       <Footer />
       <br />
     </div>

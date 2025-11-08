@@ -1,0 +1,2 @@
+- [x] Edit src/customers/Pages/Auth/Signup.tsx: Add import for Google icon and insert "or login with google" section after the form.
+- [x] Edit src/customers/Pages/Auth/Login.tsx: Add import for Google icon and insert "or login with google" section after the form.
